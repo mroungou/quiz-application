@@ -1,3 +1,5 @@
+from string import ascii_lowercase
+
 
 # storing questions and answers
 # each element of the list will have a two-tuple containing the question text and answer
@@ -19,18 +21,26 @@ QUESTIONS = {
     ],
 }
 
-
-# looping through the list
-for question, alternatives in QUESTIONS.items():
+# keeping track of amount of correct answers
+correct_num = 0
+# looping through the dictionary
+for question_number, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
+    print(f"\nQuestion {question_number}:")
+    print(f"{question}?")
     correct_answer = alternatives[0]
-    sorted_alternatives = sorted(alternatives)
-    for label,  alternative in enumerate(sorted_alternatives):
+    labeled_alternatives = dict(zip(ascii_lowercase, sorted(alternatives)))
+    for label,  alternative in labeled_alternatives.items():
         print(f" {label}) {alternative}")
 
     # int() because input returns a string
-    answer_label = int(input(f"{question}? "))
-    answer = sorted_alternatives[answer_label]
+    answer_label = input("\nChoice? ")
+    answer = labeled_alternatives.get(answer_label)
     if answer == correct_answer:
-        print('Correct!')
+        correct_num += 1
+        print('⭐ Correct! ⭐')
     else:
         print(f"The answer is {correct_answer!r}, not {answer!r}")
+
+# question_number variable already counts the number of questions in the quiz
+# can be used to report the total number of questions that the user has answered
+print(f"\nYou got {correct_num} correct out of {question_number} questions")
