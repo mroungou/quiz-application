@@ -19,6 +19,19 @@ QUESTIONS = {
         "To compress several files into one archive",
         "To get information from the user"
     ],
+    "How do you iterate over both indices and elements in an iterable": [
+        "enumerate(iterable)",
+        "enumerate(iterable, start=1)",
+        "range(iterable)",
+        "range(iterable, start=1)",
+    ],
+
+    "What's the offcicial name of the := operator": [
+        "Assignment expression",
+        "Named expression",
+        "Walrus operator",
+        "Colon equals operator",
+    ],
 }
 
 # keeping track of amount of correct answers
@@ -33,7 +46,9 @@ for question_number, (question, alternatives) in enumerate(QUESTIONS.items(), st
         print(f" {label}) {alternative}")
 
     # int() because input returns a string
-    answer_label = input("\nChoice? ")
+    while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
+        print(f"Please answer one of {', '.join(labeled_alternatives)}")
+
     answer = labeled_alternatives.get(answer_label)
     if answer == correct_answer:
         correct_num += 1
