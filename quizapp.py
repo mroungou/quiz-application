@@ -1,8 +1,11 @@
 from string import ascii_lowercase
+import random
 
 
 # storing questions and answers
 # each element of the list will have a two-tuple containing the question text and answer
+
+num_questions_per_quiz = 5
 QUESTIONS = {
     "When was the first known use of the word 'quiz'":  [
         "1781", "1771", "1871", "1881"
@@ -34,14 +37,19 @@ QUESTIONS = {
     ],
 }
 
+num_questions = min(num_questions_per_quiz, len(QUESTIONS))
+# this will generate a random sample of questions in whatever order
+questions = random.sample(list(QUESTIONS.items()), k=num_questions)
 # keeping track of amount of correct answers
 correct_num = 0
 # looping through the dictionary
-for question_number, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
+for question_number, (question, alternatives) in enumerate(questions, start=1):
     print(f"\nQuestion {question_number}:")
     print(f"{question}?")
     correct_answer = alternatives[0]
-    labeled_alternatives = dict(zip(ascii_lowercase, sorted(alternatives)))
+    labeled_alternatives = dict(
+        zip(ascii_lowercase, random.sample(alternatives, k=len(alternatives)))
+    )
     for label,  alternative in labeled_alternatives.items():
         print(f" {label}) {alternative}")
 
