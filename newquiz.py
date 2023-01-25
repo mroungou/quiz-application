@@ -1,4 +1,4 @@
-import random 
+import random
 from string import ascii_lowercase
 
 num_questions_per_quiz = 5
@@ -32,3 +32,27 @@ QUESTIONS = {
         "Colon equals operator",
     ],
 }
+
+# this function will handle the questions and the number of questions parametres
+
+
+def prepare_quiz(questions, num_questions):
+    num_questions = min(num_questions, len(questions))
+    # this will generate a random sample of questions in whatever order
+    return random.sample(list(questions.items()), k=num_questions)
+
+# printing the question, the alternatives, handling user errors
+
+def get_answer(question, alternatives):
+    print(f"{question}?")
+    labeled_alternatives = dict(
+        zip(ascii_lowercase, random.sample(alternatives, k=len(alternatives)))
+    )
+    for label,  alternative in labeled_alternatives.items():
+        print(f" {label}) {alternative}")
+
+     # int() because input returns a string
+    while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
+        print(f"Please answer one of {', '.join(labeled_alternatives)}")
+
+    return labeled_alternatives[answer_label]
