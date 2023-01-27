@@ -43,6 +43,7 @@ def prepare_quiz(questions, num_questions):
 
 # printing the question, the alternatives, handling user errors
 
+
 def get_answer(question, alternatives):
     print(f"{question}?")
     labeled_alternatives = dict(
@@ -52,7 +53,23 @@ def get_answer(question, alternatives):
         print(f" {label}) {alternative}")
 
      # int() because input returns a string
+    #  handling user errors
     while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
         print(f"Please answer one of {', '.join(labeled_alternatives)}")
 
     return labeled_alternatives[answer_label]
+
+
+def ask_question(question, alternatives):
+    correct_answer = alternatives[0]
+    orderded_alternatives = random.sample(alternatives, k=len(alternatives))
+
+    answer = get_answer(question, orderded_alternatives)
+    if answer == correct_answer:
+        print('⭐ Correct! ⭐')
+        return 1
+    else:
+        print(f"The answer is {correct_answer!r}, not {answer!r}")
+        return 0
+        # the function returns 1 or 0 to indicate to the calling function whether the answer
+        # is correct or wrong // alternatively True and False could have been used
