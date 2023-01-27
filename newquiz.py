@@ -73,3 +73,18 @@ def ask_question(question, alternatives):
         return 0
         # the function returns 1 or 0 to indicate to the calling function whether the answer
         # is correct or wrong // alternatively True and False could have been used
+
+
+def run_quiz():
+    questions = prepare_quiz(QUESTIONS, num_questions=num_questions_per_quiz)
+    correct_num = 0
+
+    for num, (question, alternatives) in enumerate(questions, start=1):
+        print(f"\nQuestion {num}")
+        correct_num += ask_question(question, alternatives)
+
+    print(f"\nYou got {correct_num} correct out of {num} questions")
+
+
+if __name__ == "__main__":
+    run_quiz()
