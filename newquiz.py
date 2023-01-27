@@ -1,5 +1,11 @@
 import random
 from string import ascii_lowercase
+import toml
+
+with open("questions.toml", mode="rb") as toml_file:
+    questions2 = toml.load(toml_file)
+
+# print(questions2)
 
 num_questions_per_quiz = 5
 QUESTIONS = {
@@ -86,5 +92,5 @@ def run_quiz():
     print(f"\nYou got {correct_num} correct out of {num} questions")
 
 
-if __name__ == "__main__":
-    run_quiz()
+# if __name__ == "__main__":
+#     run_quiz()
