@@ -1,9 +1,20 @@
 import random
 from string import ascii_lowercase
-import toml
+from getpass import getpass
+from mysql.connector import connect, Error
 
-with open("questions.toml", mode="rb") as toml_file:
-    questions2 = toml.load(toml_file)
+try:
+    with connect(
+        host='localhost',
+        user = input("Enter username: "),
+        password = getpass("Enter password: "),
+        database = "quizQuestions_db"
+    ) as connection:
+        print(connection)
+except Error as e:
+    print(e)
+
+
 
 # print(questions2)
 
